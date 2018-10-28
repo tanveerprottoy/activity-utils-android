@@ -37,9 +37,11 @@ object ActivityUtil {
     }
 
     fun replaceFragmentOnActivity(fragmentManager: FragmentManager?,
-                                  fragment: Fragment, frameId: Int, name: String,
-                                  view: View, transitionName: String) {
+                                  fragment: Fragment, frameId: Int, name: String, view: View,
+                                  transitionName: String, enterAnim: Int, exitAnim: Int,
+                                  popEnterAnim: Int, popExitAnim: Int) {
         fragmentTransaction = fragmentManager?.beginTransaction()
+        fragmentTransaction?.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim)
         fragmentTransaction?.addSharedElement(view, transitionName)
         fragmentTransaction?.replace(frameId, fragment)
         fragmentTransaction?.addToBackStack(name)
@@ -47,9 +49,8 @@ object ActivityUtil {
     }
 
     fun replaceFragmentOnActivity(fragmentManager: FragmentManager?,
-                                  fragment: Fragment, frameId: Int, name: String,
-                                  enterAnim: Int, exitAnim: Int, popEnterAnim: Int,
-                                  popExitAnim: Int) {
+                                  fragment: Fragment, frameId: Int, name: String, enterAnim: Int,
+                                  exitAnim: Int, popEnterAnim: Int, popExitAnim: Int) {
         fragmentTransaction = fragmentManager?.beginTransaction()
         fragmentTransaction?.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim)
         fragmentTransaction?.replace(frameId, fragment)
